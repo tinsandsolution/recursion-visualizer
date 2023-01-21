@@ -3,10 +3,25 @@
   border: 1px solid black;
   height: inherit;
   padding: 1% 1% 1% 1%;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
 }
 
 .main {
   display: flex;
   flex-direction: row;
   height: 100vh;
+}
+
+
+.code-input {
+  /* width: 100%; */
+  /* height: 100%; */
+  width: 95%;
+  /* height: 80%; */
+  margin: auto;
+  font-size: 18px;
+  border: 1px solid black;
+  padding: 1% 1% 1% 1%;
 }
