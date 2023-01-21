@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   const [initialData, setInitialData] = useState("5, 4, 3, 2, 1");
   const [baseCase, setBaseCase] = useState('if (inputArray.length === 0) return 0;');
-  const [recursiveCall, setRecursiveCall] = useState('return arr[0] + recursiveCall(arr.slice(1)) + 5;');
+  const [recursiveCall, setRecursiveCall] = useState('return arr[0] + recursiveCall(arr.slice(1))');
 
   const turnIntoArray = (rawDataString) => {
     const rawDataArray = rawDataString.split(',');
@@ -109,15 +109,29 @@ function App() {
     <div className="half-page">
       <h1>Visualizer</h1>
 
-      {turnIntoArray(initialData).map((v,i) => {
+      {[...turnIntoArray(initialData),"basecasefinal"].map((v,i) => {
         const CSScolor = {paddingLeft: String(3*i) + '%'}
 
+        // {waitingToReturn, }
+        if (turnIntoArray(initialData).slice(i).length == 0) {
+          return (
+            <div style={CSScolor}>
+              <h2>Layer {i}</h2>
+              inputArray is {`[${turnIntoArray(initialData).slice(i)}]`} <br />
+              We have hit the base case, so we return {
+                // regex that gets everything in the string after "return" and before ";"
+                String(baseCase.match(/(?<=return).*/))
+              } <br />
+            </div>
+          )
+        }
 
         return (
           <div style={CSScolor}>
             <h2>Layer {i}</h2>
-            inputArray is {`[${initialData}]`} <br />
+            inputArray is {`[${turnIntoArray(initialData).slice(i)}]`} <br />
             we are waiting to return {waitingToReturn(recursiveCall)} <br />
+            which is {turnIntoArray(initialData)[i]} plus recursivecall from below<br />
           </div>
         )
       })}
